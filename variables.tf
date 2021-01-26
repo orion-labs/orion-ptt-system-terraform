@@ -22,7 +22,6 @@ variable "prefix" {
 
 variable "subnet_id" {
   description   = "ID of your public subnet"
-  default       = ""
 }
 
 variable "volume_size" {
@@ -37,5 +36,4 @@ variable "ubuntu_version" {
 
 variable "vpc_id" {
   description   = "ID of your VPC"
-  default       = ""
 }
