@@ -4,7 +4,6 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  version = "2.68.0"
 }
 
 #provider "template" {
