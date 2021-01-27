@@ -7,7 +7,7 @@ jobs:
       GO111MODULE: "on"
       GOPRIVATE: "github.com/onbeep"
       GOPATH: /go
-      PATH: /go/bin:$PATH
+      PATH: /go/bin:${PATH}
     steps:
       - checkout
 
