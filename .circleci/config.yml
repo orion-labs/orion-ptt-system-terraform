@@ -12,16 +12,20 @@ jobs:
       - checkout
 
       - run:
+          name: Golang Setup
+          command: mkdir /go/src /go/pkg /go/bin
+
+      - run:
+          name: Install Packages
+          command: apk add --no-cache go git
+
+      - run:
           name: GitHub Identity
           command: |
             # Set identity, which is necessary for tagging/releasing
             git config --global user.name "CircleCI"
             git config --global user.email "code@orionlabs.io"
             git config --global url."git@github.com:".insteadOf "https://github.com/"
-
-      - run:
-          name: Install Golang
-          command: mkdir /go/src /go/pkg /go/bin && apk add --no-cache go
 
       - run:
           name: Get go-scmversion
