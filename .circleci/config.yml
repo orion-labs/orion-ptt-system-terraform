@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: 194425072870.dkr.ecr.us-east-1.amazonaws.com/terraform:0.0.11
+      - image: hashicorp/terraform:0.12.28
     steps:
       - checkout
 
