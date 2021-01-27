@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: Golang Setup
-          command: mkdir /go/src /go/pkg /go/bin
+          command: mkdir -p /go/src /go/pkg /go/bin
 
       - run:
           name: Install Packages
