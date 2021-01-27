@@ -1,12 +1,3 @@
-data "aws_vpc" "default" {
-
-}
-
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
-
-}
-
 # Autodetect Latest Ubuntu Image
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -54,7 +45,7 @@ EOF
 resource "aws_security_group" "orion-ptt-system-k8s-node" {
   name        = "${var.prefix}-orion-ptt-system K8s Node"
   description = "Allow traffic to Kubernetes"
-  vpc_id      = coalesce(var.vpc_id, data.aws_vpc.default.id)
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_security_group_rule" "k8s-http" {

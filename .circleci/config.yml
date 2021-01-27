@@ -1,0 +1,58 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: hashicorp/terraform:0.12.28
+    environment:
+      GO111MODULE: "on"
+      GOPRIVATE: "github.com/onbeep"
+      GOPATH: /go
+    steps:
+      - checkout
+
+      - run:
+          name: Golang Setup
+          command: mkdir -p /go/src /go/pkg /go/bin
+
+      - run:
+          name: Install Packages
+          command: apk add --no-cache go
+
+      - run:
+          name: GitHub Identity
+          command: |
+            # Set identity, which is necessary for tagging/releasing
+            git config --global user.name "CircleCI"
+            git config --global user.email "code@orionlabs.io"
+            git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+      - run:
+          name: Get go-scmversion
+          command: go get github.com/onbeep/go-scmversion
+
+      - run:
+          name: Update version numbers
+          command: |
+            # Do `scmversion` stuff before install, so the
+            # version number can be injected for any binary that goes out.
+            if [ $CIRCLE_BRANCH = "master" ]; then
+              /go/bin/go-scmversion --write --auto
+            else
+              /go/bin/go-scmversion --write --pre=$CIRCLE_BUILD_NUM
+            fi
+
+            echo "Build Version `cat VERSION`"
+
+      - run:
+          name: Terraform Init
+          command: terraform init
+
+      - run:
+          name: Terraform Validate
+          command: terraform validate
+
+workflows:
+  version: 2
+  primary:
+    jobs:
+      - test
