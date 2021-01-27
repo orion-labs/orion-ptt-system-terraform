@@ -7,7 +7,6 @@ jobs:
       GO111MODULE: "on"
       GOPRIVATE: "github.com/onbeep"
       GOPATH: /go
-      PATH: /go/bin:${PATH}
     steps:
       - checkout
 
@@ -17,7 +16,7 @@ jobs:
 
       - run:
           name: Install Packages
-          command: apk add --no-cache go git
+          command: apk add --no-cache go
 
       - run:
           name: GitHub Identity
@@ -37,9 +36,9 @@ jobs:
             # Do `scmversion` stuff before install, so the
             # version number can be injected for any binary that goes out.
             if [ $CIRCLE_BRANCH = "master" ]; then
-              go-scmversion --write --auto
+              /go/bin/go-scmversion --write --auto
             else
-              go-scmversion --write --pre=$CIRCLE_BUILD_NUM
+              /go/bin/go-scmversion --write --pre=$CIRCLE_BUILD_NUM
             fi
 
             echo "Build Version `cat VERSION`"
