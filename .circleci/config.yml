@@ -3,6 +3,11 @@ jobs:
   test:
     docker:
       - image: hashicorp/terraform:0.12.28
+    environment:
+      GO111MODULE: "on"
+      GOPRIVATE: "github.com/onbeep"
+      GOPATH: /go
+      PATH: /go/bin:$PATH
     steps:
       - checkout
 
@@ -16,7 +21,7 @@ jobs:
 
       - run:
           name: Install Golang
-          command: apk add --no-cache go
+          command: mkdir /go/src /go/pkg /go/bin && apk add --no-cache go
 
       - run:
           name: Get go-scmversion
