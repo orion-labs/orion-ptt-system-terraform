@@ -28,6 +28,7 @@ jobs:
             else
               go-scmversion --write --pre=$CIRCLE_BUILD_NUM
             fi
+
             echo "Build Version `cat VERSION`"
 
       - run:
