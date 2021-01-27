@@ -15,6 +15,10 @@ jobs:
             git config --global url."git@github.com:".insteadOf "https://github.com/"
 
       - run:
+          name: Install Golang
+          command: apk add --no-cache go
+
+      - run:
           name: Get go-scmversion
           command: go get github.com/onbeep/go-scmversion
 
