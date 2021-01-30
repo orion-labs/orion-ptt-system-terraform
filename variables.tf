@@ -30,7 +30,13 @@ variable "volume_size" {
 
 }
 
+variable "ami_owner" {
+  description   = "Owner of AMI image to launch.  Defaults to Canonical."
+  default       = "099720109477"
+}
+
 variable "ubuntu_version" {
+  description = "Ubuntu version string used to find AMI ID if one is not specified."
   default       = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
 }
 

@@ -12,7 +12,7 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"] # Canonical
+  owners = [var.ami_owner]
 }
 
 # initial instance installer with userdata to install kURL
