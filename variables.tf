@@ -43,3 +43,19 @@ variable "ubuntu_version" {
 variable "vpc_id" {
   description   = "ID of your VPC"
 }
+
+variable "create_dns" {
+  description = "Whether to configure DNS Records in Route53."
+  default = false
+}
+
+
+variable "dns_zone_id" {
+  description = "Route53 Zone ID.  (Required to configure Route53.)"
+  default = ""
+}
+
+variable "domain" {
+  description = "DNS Domain.  Service records will be created on this domain.  It must be one you control.  (Required to configure Route53.)"
+  default = ""
+}

@@ -101,3 +101,65 @@ resource "aws_security_group_rule" "k8s-node-outbound" {
   description       = "outbound traffic"
 }
 
+resource "aws_route53_record" "alnilam" {
+  zone_id = var.dns_zone_id
+  name    = format("alnilam.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "atlas" {
+  zone_id = var.dns_zone_id
+  name    = format("atlas.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "icarus" {
+  zone_id = var.dns_zone_id
+  name    = format("icarus.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "observer" {
+  zone_id = var.dns_zone_id
+  name    = format("observer.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "rigel" {
+  zone_id = var.dns_zone_id
+  name    = format("rigel.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "task_queue" {
+  zone_id = var.dns_zone_id
+  name    = format("taskqueue.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
+
+resource "aws_route53_record" "vault" {
+  zone_id = var.dns_zone_id
+  name    = format("vault.%s", var.domain)
+  type    = "A"
+  records = [aws_instance.orion-ptt-system.public_ip]
+  ttl     = 300
+  count   = var.create_dns ? 1 : 0
+}
