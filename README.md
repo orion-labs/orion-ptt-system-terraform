@@ -239,7 +239,7 @@ Leverage [Terraform](https://www.terraform.io/) to create a Kubernetes Cluster o
 
    Enter `yes` to proceed with creation of the stack.
 
-*NB: This terraform code will install the necessary infrastructure to run the Orion PTT System.  The system itself will not operate without a valid license from [Orion Labs](https://orionlabs.io).
+*NB: This terraform code will install the necessary infrastructure to run the Orion PTT System.  The system itself will not operate without a valid license from [Orion Labs](https://orionlabs.io). *
 
 ## DNS
 
