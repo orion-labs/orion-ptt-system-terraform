@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: hashicorp/terraform:0.12.28
+      - image: hashicorp/terraform:0.13.6
     environment:
       GO111MODULE: "on"
       GOPRIVATE: "github.com/onbeep"
