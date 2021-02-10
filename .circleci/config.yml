@@ -44,6 +44,10 @@ jobs:
             echo "Build Version `cat VERSION`"
 
       - run:
+          name: Set AWS region so we can validate
+          command: echo 'provider "aws" { region = "us-east-1" }' > aws.tf
+
+      - run:
           name: Terraform Init
           command: terraform init
 
