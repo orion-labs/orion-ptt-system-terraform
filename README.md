@@ -254,3 +254,22 @@ To enable DNS via Route53, add the following optional variables in your variable
 If you choose not to follow this step, you will need to set up DNS manually, or use the above repo as a module in your own terraform code that configures DNS independently.
 
 To configure DNS Records manually, consult your DNS Provider, or see [https://aws.amazon.com/route53/](https://aws.amazon.com/route53/) for reference.
+
+
+## VPC Creation
+
+If you like, this repo will create a VPC for you.
+
+Simply include the following in your variable file:
+
+      create_vpc = true
+
+By default it will create a VPC with a network of `34.203.14.50` and a subnet using `34.203.14.50` and an availability zome of `us-east-1a`.
+
+You can override these values with the following in your variable file:
+
+
+      create_vpc = true
+      vpc_network = "10.44.0.0/21"
+      public_subnet_cidr = "10.44.0.0/24"
+      public_subnet_az = "us-east-1a"

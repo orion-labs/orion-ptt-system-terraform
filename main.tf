@@ -163,3 +163,62 @@ resource "aws_route53_record" "vault" {
   ttl     = 300
   count   = var.create_dns ? 1 : 0
 }
+
+# The VPC
+resource "aws_vpc" "orion-vpc" {
+  count                 = var.create_dns ? 1 : 0
+  cidr_block            = var.vpc_network
+  enable_dns_hostnames  = true
+  enable_dns_support    = true
+
+
+  tags = {
+    Name = var.vpc_name
+  }
+}
+
+# internet gateway
+resource "aws_internet_gateway" "gw" {
+  count  = var.create_dns ? 1 : 0
+  vpc_id = aws_vpc.orion-vpc[count.index].id
+
+  tags = {
+    Name = "main"
+  }
+}
+
+# route tables
+resource "aws_route_table" "public" {
+  count  = var.create_dns ? 1 : 0
+  vpc_id = aws_vpc.orion-vpc[count.index].id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw[count.index].id
+
+  }
+
+  tags = {
+    Name = "Orion PTT System Public Route Table"
+
+  }
+}
+
+# subnets
+resource "aws_subnet" "public_subnet" {
+  count             = var.create_dns ? 1 : 0
+  vpc_id            = aws_vpc.orion-vpc[count.index].id
+  cidr_block        = var.public_subnet_cidr
+  availability_zone = var.public_subnet_az
+
+  tags = {
+    Name = "Orion PTT System Public Subnet"
+  }
+}
+
+resource aws_route_table_association "public" {
+  count           = var.create_dns ? 1 : 0
+  subnet_id       = aws_subnet.public_subnet[count.index].id
+  route_table_id  = aws_route_table.public[count.index].id
+}
+

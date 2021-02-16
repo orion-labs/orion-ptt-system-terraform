@@ -59,3 +59,28 @@ variable "domain" {
   description = "DNS Domain.  Service records will be created on this domain.  It must be one you control.  (Required to configure Route53.)"
   default = ""
 }
+
+variable "vpc_name" {
+  default = "Orion PTT System"
+  description = "Name of the VPC to create"
+}
+
+variable "vpc_network" {
+  default = "10.44.0.0/21"
+  description = "IPv4 CIDR for your VPC's network"
+}
+
+variable "public_subnet_cidr" {
+  default = "10.44.0.0/24"
+  description = "IPv4 CIDR Block for Public Subnet"
+}
+
+variable "public_subnet_az" {
+  default = "us-east-1a"
+  description = "Public Subnet Availability Zone"
+}
+
+variable "create_vpc" {
+  description = "Whether to create a VPC"
+  default = false
+}
